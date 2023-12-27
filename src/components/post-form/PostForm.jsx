@@ -11,24 +11,24 @@ const PostForm = ({ post }) => {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || '',
-            slug: post?.slug || '',
+            slug: post?.$id || '',
             content: post?.content || '',
             status: post?.status || "active"
         }
     });
     const navigate = useNavigate();
 
-    const userData = useSelector(state => state.user.userData);
+    const userData = useSelector(state => state.auth.userData);
 
     const submit = async (data) => {
         if (post) {
-            const file = await data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
+            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
             if (file) {
                 appwriteService.deleteFile(post.featuredImage);
             }
 
-            const dbPost = await appwriteService.updatePost(post.$id, { ...data, featuredImage: file ? $id : undefined });
+            const dbPost = await appwriteService.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined });
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
@@ -49,13 +49,19 @@ const PostForm = ({ post }) => {
     }
 
     const slugTransform = useCallback((value) => {
-        if (value && typeof (value) === 'string') {
+
+
+        if (value && typeof value === "string")
+
             // const slug = value.toLowerCase().replace(/ /g , '-')
             // setValue('slug',slug);
             // return slug
 
-            return value.trim().toLowerCase().replace(/^[a-zA-Z\d\d\s]+/g).replace(/ \s/, "-");
-        }
+            return value
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-zA-Z\d\s]+/g, "-")
+                .replace(/\s/g, "-");
         return "";
     }, []);
 
@@ -63,7 +69,7 @@ const PostForm = ({ post }) => {
     React.useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === 'title') {
-                setValue('slug', slugTransform(value.title, { shouldValidate: true }));
+                setValue('slug', slugTransform(value.title), { shouldValidate: true });
             }
         })
 
@@ -125,7 +131,7 @@ const PostForm = ({ post }) => {
                     {...register("status", { required: true })}
                 />
 
-                <Button type="submit" bgColor={post ? 'bg-green500' : undefined} className="w-full" >{post ? "Update" : "Submit"}</Button>
+                <Button type="submit" bgColor={post ? 'bg-green-500' : undefined} className="w-full" >{post ? "Update" : "Submit"}</Button>
 
             </div>
         </form>

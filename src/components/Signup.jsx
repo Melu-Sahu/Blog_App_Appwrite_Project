@@ -7,23 +7,22 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 
-
 const Signup = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
-    const create = async (data) => {
+    const create = async(data) => {
         setError('');
         try {
             const userData = await authService.createAccount(data);
             if (userData) {
-                const currentUserData = await authService.getCurrentUser();
-                if (currentUserData) {
-                    dispatch(login(currentUserData));
-                    navigate('/');
+                const userData = await authService.getCurrentUser();
+                if (userData) {
+                    dispatch(login(userData));
                 }
+                navigate('/');
             }
 
         } catch (error) {
@@ -32,7 +31,7 @@ const Signup = () => {
 
     }
 
-    useEffect(()=>console.log("signup component rendered."),[]);
+    useEffect(()=>console.log("signup inner component rendered."),[]);
 
     return (
         <div className='flex items-center justify-center'>
@@ -42,7 +41,7 @@ const Signup = () => {
                         <Logo width='100%' />
                     </span>
                 </div>
-                <h2>Sign in to create account</h2>
+                <h2 className="text-center text-2xl font-bold leading-tight">Sign up to create account</h2>
                 <p className='mt-2 text-center text-base text-black/50'>
                     Already have an account?&nbsp;
                     <Link to={'/login'} className='font-medium text-primary transition-all duration-200 hover:underline'>Sign In</Link>
