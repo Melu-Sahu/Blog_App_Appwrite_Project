@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import authService from '../appwrite/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../store/authSlice';
 import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { data } from 'autoprefixer';
 
 
 
@@ -15,7 +14,7 @@ const Signup = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
-    const create = async () => {
+    const create = async (data) => {
         setError('');
         try {
             const userData = await authService.createAccount(data);
@@ -32,6 +31,8 @@ const Signup = () => {
         }
 
     }
+
+    useEffect(()=>console.log("signup component rendered."),[]);
 
     return (
         <div className='flex items-center justify-center'>

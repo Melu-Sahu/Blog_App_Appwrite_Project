@@ -50,22 +50,22 @@ const Login = () => {
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5'>
                         <Input
-                        label = "Email:"
-                        placeholder = "Your email"
-                        type="email"
-                        {...register("email",{
-                            required:true,
-                            validate: { 
-                                matchPattern: (value)=> /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(value) || "Email must be valid."
-                            }
-                        })}  />
+                            label="Email:"
+                            placeholder="Your email"
+                            type="email"
+                            {...register("email", {
+                                required: true,
+                                validate: {
+                                    matchPattern: (value) => /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(value) || "Email must be valid."
+                                }
+                            })} />
                         <Input
-                        label = "Password:"
-                        placeholder = "Your password"
-                        type="password"
-                        {...register("password",{
-                            required:true
-                        })}  />
+                            label="Password:"
+                            placeholder="Your password"
+                            type="password"
+                            {...register("password", {
+                                required: true
+                            })} />
                         <Button type='submit' className="w-full">Sign in</Button>
                     </div>
                 </form>

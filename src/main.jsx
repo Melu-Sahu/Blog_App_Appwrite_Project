@@ -9,60 +9,64 @@ import Home from './pages/Home.jsx';
 import AllPosts from './pages/AllPosts.jsx';
 import AddPost from './pages/AddPost.jsx';
 import EditPost from './pages/EditPost.jsx';
-import { AuthLayout, Signup, Login } from './components/index.js';
+import Signup from './pages/Signup.jsx';
+import { AuthLayout, Login } from './components/index.js';
 
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: "/",
+        element: <Home />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: (
           <AuthLayout authentication={false}>
             <Login />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path: '/signup',
+        path: "/signup",
         element: (
           <AuthLayout authentication={false}>
             <Signup />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path: '/all-posts',
+        path: "/all-posts",
         element: (
           <AuthLayout authentication={true}>
+            {" "}
             <AllPosts />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path: '/add-posts',
+        path: "/add-post",
         element: (
           <AuthLayout authentication={true}>
+            {" "}
             <AddPost />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path: '/edit-post/:slug',
+        path: "/edit-post/:slug",
         element: (
           <AuthLayout authentication={true}>
+            {" "}
             <EditPost />
           </AuthLayout>
-        )
+        ),
       }
-    ]
-  }
+    ],
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
