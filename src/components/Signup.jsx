@@ -33,9 +33,6 @@ const Signup = () => {
 
     }
 
-
-
-
     return (
         <div className='flex items-center justify-center'>
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl border border-black/10`}>
