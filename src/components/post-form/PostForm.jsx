@@ -31,6 +31,7 @@ const PostForm = ({ post }) => {
             const dbPost = await appwriteService.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined });
 
             if (dbPost) {
+                console.log("Updated");
                 navigate(`/post/${dbPost.$id}`);
             }
 
@@ -42,6 +43,7 @@ const PostForm = ({ post }) => {
                 data.featuredImage = fileId;
                 const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
                 if (dbPost) {
+                    console.log("Posted.");
                     navigate(`/post/${dbPost.$id}`);
                 }
             }
@@ -73,9 +75,8 @@ const PostForm = ({ post }) => {
             }
         })
 
-        return () => {
-            subscription.unsubscribe();
-        }
+        return () => subscription.unsubscribe();
+
 
     }, [watch, slugTransform, setValue])
 
@@ -107,7 +108,7 @@ const PostForm = ({ post }) => {
             <div className='w-1/3 px-2'>
                 <Input
                     label="Featured Image :"
-                    placeholder="file"
+                    type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {
@@ -125,13 +126,13 @@ const PostForm = ({ post }) => {
                 }
 
                 <Select
-                    options={['active', 'inactive']}
+                    options={["active", "inactive"]}
                     label="Status"
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
 
-                <Button type="submit" bgColor={post ? 'bg-green-500' : undefined} className="w-full" >{post ? "Update" : "Submit"}</Button>
+                <Button type="submit" bgColor={post ? 'bg-green-500' : undefined} className="w-full" >{post ? "Update" : "Post"}</Button>
 
             </div>
         </form>

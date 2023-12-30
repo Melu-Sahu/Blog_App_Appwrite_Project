@@ -86,18 +86,17 @@ export class Service {
         }
     }
 
-    async getPosts(queries = [Query.equal('status', 'active')]) {
-
+    async getPosts(queries = [Query.equal("status", "active")]){
         try {
             return await this.databases.listDocuments(
                 config.appwriteDatabaseID,
                 config.appwriteCollectiontID,
-                queries
+                queries,
+            
             )
-
-
         } catch (error) {
-            console.log("Appwrite Service :: Get Posts :: error", error);
+            console.log("Appwrite serive :: getPosts :: error", error);
+            return false
         }
     }
 
@@ -136,7 +135,7 @@ export class Service {
 
     }
 
-    getFilePreview(fileId) {
+    getFilePreview(fileId){
         return this.bucket.getFilePreview(
             config.appwriteBucketID,
             fileId
@@ -144,5 +143,5 @@ export class Service {
     }
 }
 
-const appwriteService = new Service()
-export default appwriteService;
+const service = new Service()
+export default service;

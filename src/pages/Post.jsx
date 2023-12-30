@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import appwriteService from '../appwrite/appConfig';
-import { Button, Container } from '../components/index';
+import { Button, Container } from '../components';
 import  parse  from 'html-react-parser';
 import { useSelector } from 'react-redux';
 
@@ -20,9 +20,9 @@ const Post = () => {
 
     useEffect(() => {
         if (slug) {
-            appwriteService.getPost(slug).then((post) => {
-                if (post) {
-                    setPost(post);
+            appwriteService.getPost(slug).then((data) => {
+                if (data) {
+                    setPost(data);
                 } else {
                     navigate("/");
                 }
@@ -62,7 +62,7 @@ const Post = () => {
                                     </Button>
                                 </Link>
                                 <Button
-                                    bgColor="bg-green-500"
+                                    bgColor="bg-red-500"
                                     className="mr-3"
                                     onClick={deletePost}>
                                     Delete
