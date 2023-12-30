@@ -16,6 +16,8 @@ function Footer() {
                 <p className="text-sm text-gray-600">
                   &copy; Copyright 2023. All Rights Reserved by DevUI.
                 </p>
+                <p className='my-2'> Find me on : <a href="https://github.com/Melu-Sahu" target='_blank' className='underline text-blue-600'>github</a></p>
+                <p className='my-2'> Contact me on : +91 7583000742</p>
               </div>
             </div>
           </div>
