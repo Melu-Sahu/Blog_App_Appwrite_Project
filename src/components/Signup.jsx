@@ -13,10 +13,10 @@ const Signup = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
-    const create = async(data) => {
+    const create = async (data) => {
         setError('');
         try {
-            const userData = await authService.createAccount(data);
+            const userData = authService.createAccount(data);
             if (userData) {
                 const userData = await authService.getCurrentUser();
                 if (userData) {
@@ -31,7 +31,7 @@ const Signup = () => {
 
     }
 
-    useEffect(()=>console.log("signup inner component rendered."),[]);
+    useEffect(() => console.log("signup inner component rendered."), []);
 
     return (
         <div className='flex items-center justify-center'>

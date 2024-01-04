@@ -17,7 +17,7 @@ const Login = () => {
     const login = async (data) => {
         setError("");
         try {
-            const session = await authService.login(data);
+            const session =  authService.login(data);
 
             if (session) {
                 const userData = await authService.getCurrentUser();
@@ -68,7 +68,7 @@ const Login = () => {
                             {...register("password", {
                                 required: true
                             })} />
-                        <Button type='submit' className="w-full">Sign in</Button>
+                        <Button type='submit' className="w-full">Log in</Button>
                     </div>
                 </form>
             </div>
