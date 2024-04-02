@@ -24,7 +24,7 @@ export class AuthService {
             }else{
                 return userAccount;
             }
-            
+
         }catch(error){
             console.log("Appwrite Service :: createAccount :: error", error);
         }
@@ -49,6 +49,24 @@ export class AuthService {
         return null;
 
     }
+
+
+    async googleSignUp(){
+        try {
+            const user = await this.account.createOAuth2Session("google");
+            if(user){
+                this.googleLogin();
+            }
+        } catch (error) {
+            console.log("Appwrite Service :: Google SignUP :: error", error);
+        }
+    }
+
+    async googleLogin(){
+        
+    }
+
+
 
     async logout(){
         try{

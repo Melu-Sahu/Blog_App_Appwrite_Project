@@ -33,10 +33,13 @@ const Header = () => {
       name: "Add post",
       slug: '/add-post',
       active: authStatus
+    },
+    {
+      name: "Profile",
+      slug: '/profile',
+      active: authStatus
     }
-
   ]
-
 
   return (
     <header className='py-3 shadow bg-gray-500'>
@@ -56,7 +59,7 @@ const Header = () => {
                 </li>) : null
               )
             }
-            {authStatus &&  (
+            {authStatus && (
               <li><LogoutBtn /></li>
             )}
           </ul>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import appwriteService from '../appwrite/appConfig';
 import { Button, Container } from '../components';
-import  parse  from 'html-react-parser';
+import parse from 'html-react-parser';
 import { useSelector } from 'react-redux';
 
 
@@ -17,7 +17,6 @@ const Post = () => {
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
-
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((data) => {
@@ -29,6 +28,7 @@ const Post = () => {
             })
         }
     }, [slug, navigate]);
+
 
 
     const deletePost = () => {
@@ -44,6 +44,7 @@ const Post = () => {
 
     return post ? (
         <div className='py-8'>
+            <p className='text-red-500 my-2'>**If you are posted this post, then you can only edit or delete this post. Otherwise these edit & delete button will not appear.</p>
             <Container>
                 <div className='w-full  flex justify-center mb-4 relative border border-xl p-2'>
                     <img
